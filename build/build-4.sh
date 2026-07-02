@@ -7,7 +7,7 @@ ros2 launch articubot_two launch_sim.launch.py
 # Then click the reload button and select the /scan topic
 
 rviz2
-Add > LaserScan
+# Add > LaserScan
 
 # Testing control
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true -p use_sim_time:=true
