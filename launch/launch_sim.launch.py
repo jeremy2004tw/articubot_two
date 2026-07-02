@@ -30,7 +30,7 @@ def generate_launch_description():
 
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value="empty.sdf",
+        default_value="./src/articubot_two/worlds/my_cool_world.sdf",
         description='World to load'
         )
 
@@ -48,7 +48,7 @@ def generate_launch_description():
     # Run the spawner node from the ros_gz_sim package. The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(package='ros_gz_sim', executable='create',
                         arguments=['-topic', 'robot_description',
-                                   '-name', 'my_bot',
+                                   '-name', 'articubot_two',
                                    '-z', '0.1'],
                         output='screen')
 
