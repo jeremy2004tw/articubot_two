@@ -32,7 +32,7 @@ def generate_launch_description():
 
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value="./src/articubot_two/worlds/my_cool_world.sdf",
+        default_value=os.path.join(get_package_share_directory(package_name), 'worlds', 'my_cool_world.sdf'),
         description='World to load'
         )
 
@@ -88,6 +88,17 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
+    twist_mux_config = os.path.join(get_package_share_directory(package_name),
+                                         'config', 'twist_mux.yaml')
+    twist_mux = Node(
+        package='twist_mux',
+        executable='twist_mux',
+        output='screen',
+        remappings={('/cmd_vel_out', '/cmd_vel')},
+        parameters=[
+            {'use_sim_time': True},
+            twist_mux_config])
+
     # Launch them all!
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -102,4 +113,5 @@ def generate_launch_description():
         ros_gz_image_bridge,
         diff_drive_spawner,
         joint_broad_spawner,
+        twist_mux,
     ])
